@@ -1,5 +1,5 @@
 import datetime
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
@@ -9,16 +9,10 @@ def hello_world():
 
 @app.route('/mappa', methods=['GET'])
 def mappa():
-  return render_template('mappa.html')
-@app.route('/mappa600', methods=['GET'])
-def mappa600():
-  return render_template('mappa600.html')
-@app.route('/mappa800', methods=['GET'])
-def mappa800():
-  return render_template('mappa800.html')
-@app.route('/mappa1000', methods=['GET'])
-def mappa1000():
-  return render_template('mappa1000.html')
+  width = request.args.get("width")
+  height = request.args.get("heigh")
+  return render_template('mappa.html', width=width, height=height)
+
 @app.route('/template', methods=['GET'])
 def template():
   return render_template('sitoTemplate/index.html')
